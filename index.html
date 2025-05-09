@@ -265,7 +265,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 6rem 2rem 4rem;
+            padding: 6rem 2rem 2rem;
         }
         
         .hero-content {
@@ -301,7 +301,14 @@
             margin-bottom: 2rem;
             position: relative;
             overflow: hidden;
+	    transition: var(--transition);
         }
+
+	.payment-banner:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+	}
         
         .payment-banner::before {
             content: '';
@@ -612,7 +619,7 @@
         <nav>
             <ul>
                 <li id="auth-container">
-                    <button class="btn" id="login-button">Login</button>
+                    <button class="btn" id="login-button">Login & Unlock!</button>
                 </li>
                 <li id="user-profile" style="display: none;">
                     <div class="user-profile">
@@ -1032,11 +1039,11 @@
         
         function showSignupForm() {
             authForms.innerHTML = `
-                <h2 class="auth-title">Create Account</h2>
+                <h2 class="auth-title">Sign Up & Proceed!</h2>
                 <form class="auth-form" id="signup-form">
                     <input type="text" id="signup-username" placeholder="Choose a username" required>
                     <input type="password" id="signup-password" placeholder="Choose a password" required>
-                    <button type="button" id="signup-submit">Create Account</button>
+                    <button type="button" id="signup-submit">Sign Up & Proceed</button>
                     <div id="signup-message" class="auth-message"></div>
                     <button type="button" class="auth-toggle" id="show-login">Already have an account? Login</button>
                 </form>
