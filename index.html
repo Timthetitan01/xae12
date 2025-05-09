@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>YesLucid's Editing Course</title>
-    <link rel="icon" type="image/x-icon" href="https://assets.squarespace.com/universal/default-favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://js.stripe.com/v3/"></script>
     
@@ -286,7 +286,7 @@
             margin-bottom: 2.5rem;
             opacity: 0.9;
 	    display: inline-block;
-            width: 800px;
+            width: 780px;
         }
         
         .payment-banner {
@@ -375,7 +375,7 @@
             margin-bottom: 1.5rem;
             box-shadow: var(--shadow);
             display: flex;
-            align-items: center;
+            flex-direction: column;
             transition: var(--transition);
             border-left: 4px solid var(--gradient-start);
         }
@@ -383,6 +383,11 @@
         .course-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+        }
+        
+        .course-content {
+            display: flex;
+            width: 100%;
         }
         
         .course-thumbnail {
@@ -511,12 +516,42 @@
             margin-left: 1rem;
         }
         
+        /* Video Container Styles */
+        .video-wrapper {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.3s ease;
+            margin-top: 1rem;
+            border-radius: var(--rounded);
+        }
+        
+        .video-wrapper.active {
+            height: 315px; /* Fixed height for 16:9 aspect ratio */
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--rounded);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.25rem;
             }
             
-            .course-item {
+            .course-content {
                 flex-direction: column;
                 text-align: center;
             }
@@ -558,6 +593,10 @@
             
             .course-list {
                 padding: 2rem 0;
+            }
+            
+            .video-wrapper.active {
+                height: 200px; /* Smaller fixed height for mobile */
             }
         }
     </style>
@@ -614,138 +653,203 @@
                 <button class="payment-btn" id="payment-button">Get Full Access - $12.00</button>
             </div>
             
-<!-- Introduction -->
-<div class="course-item free-course">
-    <div class="course-thumbnail">
-        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/c4b330b1-5ad4-4b04-a790-6bc423940a3c/thumbnail" alt="Introduction">
-    </div>
-    <div class="course-info">
-        <h3>Introduction <span class="free-badge">FREE</span></h3>
-        <p>Brief overview of the course. Find out what you can expect to learn.</p>
-        <div class="course-meta">
-            <span class="course-duration">1:23</span>
-            <button class="btn start-btn" onclick="window.open('https://www.youtube.com/watch?v=wFtscOgA30M', '_blank')">Watch Now</button>
-        </div>
-    </div>
-</div>
+            <!-- Introduction -->
+            <div class="course-item free-course">
+                <div class="course-content">
+                    <div class="course-thumbnail">
+                        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/c4b330b1-5ad4-4b04-a790-6bc423940a3c/thumbnail" alt="Introduction">
+                    </div>
+                    <div class="course-info">
+                        <h3>Introduction <span class="free-badge">FREE</span></h3>
+                        <p>Brief overview of the course. Find out what you can expect to learn.</p>
+                        <div class="course-meta">
+                            <span class="course-duration">1:23</span>
+                            <button class="btn start-btn" onclick="toggleVideo('intro-video')">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-wrapper" id="intro-video">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/wFtscOgA30M?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
 
-<!-- Clip Splicing -->
-<div class="course-item free-course">
-    <div class="course-thumbnail">
-        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/d19e2e88-1d13-4201-a038-b7d54fb72d7a/thumbnail" alt="Clip Splicing">
-    </div>
-    <div class="course-info">
-        <h3>Clip Splicing <span class="free-badge">FREE</span></h3>
-        <p>How to cut clips. Standard cuts, J cuts, L cuts & contrast editing. Intuition. It's not about following rules.</p>
-        <div class="course-meta">
-            <span class="course-duration">5:12</span>
-            <button class="btn start-btn" onclick="window.open('https://www.youtube.com/watch?v=eeJqLaQYS88&list=PLysQ4oSY7601DbwXD6eB48jvjFOt7bQiA&index=2', '_blank')">Watch Now</button>
-        </div>
-    </div>
-</div>            
-<!-- Music -->
-<div class="course-item premium-course">
-    <div class="course-thumbnail">
-        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/b428e1c9-b491-4852-bdb9-9cc518acba65/thumbnail" alt="Music">
-    </div>
-    <div class="course-info">
-        <h3>Music <span class="premium-badge">PREMIUM</span></h3>
-        <p>Different ways to get music (Epidemic, game tracks). Importance of music in matching emotion of scene.</p>
-        <div class="course-meta">
-            <span class="course-duration">9:08</span>
-            <button class="btn start-btn" data-link="https://www.youtube.com/watch?v=BnGX1ow81UI&list=PLysQ4oSY7601DbwXD6eB48jvjFOt7bQiA&index=1">Start</button>
-        </div>
-    </div>
-</div>
+            <!-- Clip Splicing -->
+            <div class="course-item free-course">
+                <div class="course-content">
+                    <div class="course-thumbnail">
+                        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/d19e2e88-1d13-4201-a038-b7d54fb72d7a/thumbnail" alt="Clip Splicing">
+                    </div>
+                    <div class="course-info">
+                        <h3>Clip Splicing <span class="free-badge">FREE</span></h3>
+                        <p>How to cut clips. Standard cuts, J cuts, L cuts & contrast editing. Intuition. It's not about following rules.</p>
+                        <div class="course-meta">
+                            <span class="course-duration">5:12</span>
+                            <button class="btn start-btn" onclick="toggleVideo('splicing-video')">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-wrapper" id="splicing-video">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/eeJqLaQYS88?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>            
+            
+            <!-- Music -->
+            <div class="course-item premium-course">
+                <div class="course-content">
+                    <div class="course-thumbnail">
+                        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/b428e1c9-b491-4852-bdb9-9cc518acba65/thumbnail" alt="Music">
+                    </div>
+                    <div class="course-info">
+                        <h3>Music <span class="premium-badge">PREMIUM</span></h3>
+                        <p>Different ways to get music (Epidemic, game tracks). Importance of music in matching emotion of scene.</p>
+                        <div class="course-meta">
+                            <span class="course-duration">9:08</span>
+                            <button class="btn start-btn" onclick="checkPremiumAccess('music-video')">Start</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-wrapper" id="music-video">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/BnGX1ow81UI?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
 
-<!-- Edit Faster -->
-<div class="course-item premium-course">
-    <div class="course-thumbnail">
-        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/f0135afb-5c35-4689-9735-be9e3a62d50d/thumbnail" alt="Edit Faster">
-    </div>
-    <div class="course-info">
-        <h3>Edit Faster <span class="premium-badge">PREMIUM</span></h3>
-        <p>Keyboard shortcuts. Deep work.</p>
-        <div class="course-meta">
-            <span class="course-duration">7:16</span>
-            <button class="btn start-btn" data-link="https://www.youtube.com/watch?v=1WHGvTA9fWE&list=PLysQ4oSY7601DbwXD6eB48jvjFOt7bQiA&index=2">Start</button>
-        </div>
-    </div>
-</div>
-<!-- Visuals -->
-<div class="course-item premium-course">
-    <div class="course-thumbnail">
-        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/d0dc8c18-ede2-4bdc-b6e4-0c0cb3ae7cf1/thumbnail" alt="Visuals">
-    </div>
-    <div class="course-info">
-        <h3>Visuals <span class="premium-badge">PREMIUM</span></h3>
-        <p>Basic visuals.</p>
-        <div class="course-meta">
-            <span class="course-duration">13:16</span>
-            <button class="btn start-btn" data-link="https://www.youtube.com/watch?v=4DeXqUnV6Bc&list=PLysQ4oSY7601DbwXD6eB48jvjFOt7bQiA&index=3">Start</button>
-        </div>
-    </div>
-</div>
+            <!-- Edit Faster -->
+            <div class="course-item premium-course">
+                <div class="course-content">
+                    <div class="course-thumbnail">
+                        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/f0135afb-5c35-4689-9735-be9e3a62d50d/thumbnail" alt="Edit Faster">
+                    </div>
+                    <div class="course-info">
+                        <h3>Edit Faster <span class="premium-badge">PREMIUM</span></h3>
+                        <p>Keyboard shortcuts. Deep work.</p>
+                        <div class="course-meta">
+                            <span class="course-duration">7:16</span>
+                            <button class="btn start-btn" onclick="checkPremiumAccess('faster-video')">Start</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-wrapper" id="faster-video">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/1WHGvTA9fWE?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Visuals -->
+            <div class="course-item premium-course">
+                <div class="course-content">
+                    <div class="course-thumbnail">
+                        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/d0dc8c18-ede2-4bdc-b6e4-0c0cb3ae7cf1/thumbnail" alt="Visuals">
+                    </div>
+                    <div class="course-info">
+                        <h3>Visuals <span class="premium-badge">PREMIUM</span></h3>
+                        <p>Basic visuals.</p>
+                        <div class="course-meta">
+                            <span class="course-duration">13:16</span>
+                            <button class="btn start-btn" onclick="checkPremiumAccess('visuals-video')">Start</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-wrapper" id="visuals-video">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/4DeXqUnV6Bc?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
 
-<!-- Advanced Visuals -->
-<div class="course-item premium-course">
-    <div class="course-thumbnail">
-        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/ed513f18-58fd-472b-9122-33e219b5bbc7/thumbnail" alt="Advanced Visuals">
-    </div>
-    <div class="course-info">
-        <h3>Advanced Visuals <span class="premium-badge">PREMIUM</span></h3>
-        <p>Complex visuals in After Effects, Blockbench.</p>
-        <div class="course-meta">
-            <span class="course-duration">18:59</span>
-            <button class="btn start-btn" data-link="https://www.youtube.com/watch?v=XtIXoOzSP8M&list=PLysQ4oSY7601DbwXD6eB48jvjFOt7bQiA&index=6">Start</button>
-        </div>
-    </div>
-</div>
+            <!-- Advanced Visuals -->
+            <div class="course-item premium-course">
+                <div class="course-content">
+                    <div class="course-thumbnail">
+                        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/ed513f18-58fd-472b-9122-33e219b5bbc7/thumbnail" alt="Advanced Visuals">
+                    </div>
+                    <div class="course-info">
+                        <h3>Advanced Visuals <span class="premium-badge">PREMIUM</span></h3>
+                        <p>Complex visuals in After Effects, Blockbench.</p>
+                        <div class="course-meta">
+                            <span class="course-duration">18:59</span>
+                            <button class="btn start-btn" onclick="checkPremiumAccess('advanced-video')">Start</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-wrapper" id="advanced-video">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/XtIXoOzSP8M?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
 
-<!-- Sound Effects -->
-<div class="course-item premium-course">
-    <div class="course-thumbnail">
-        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/30846c11-19b2-441a-bd69-8e0a9239bef5/thumbnail" alt="Sound Effects">
-    </div>
-    <div class="course-info">
-        <h3>Sound Effects <span class="premium-badge">PREMIUM</span></h3>
-        <p>How to use sound to enhance any visual/scene.</p>
-        <div class="course-meta">
-            <span class="course-duration">3:46</span>
-            <button class="btn start-btn" data-link="https://www.youtube.com/watch?v=qsZkxXOfWFo&list=PLysQ4oSY7601DbwXD6eB48jvjFOt7bQiA&index=5">Start</button>
-        </div>
-    </div>
-</div>
+            <!-- Sound Effects -->
+            <div class="course-item premium-course">
+                <div class="course-content">
+                    <div class="course-thumbnail">
+                        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/30846c11-19b2-441a-bd69-8e0a9239bef5/thumbnail" alt="Sound Effects">
+                    </div>
+                    <div class="course-info">
+                        <h3>Sound Effects <span class="premium-badge">PREMIUM</span></h3>
+                        <p>How to use sound to enhance any visual/scene.</p>
+                        <div class="course-meta">
+                            <span class="course-duration">3:46</span>
+                            <button class="btn start-btn" onclick="checkPremiumAccess('sound-video')">Start</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-wrapper" id="sound-video">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/qsZkxXOfWFo?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
 
-<!-- Make Anything Look Sexy -->
-<div class="course-item premium-course">
-    <div class="course-thumbnail">
-        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/44811a01-8937-4bf2-853c-c4c9d041629c/thumbnail" alt="Make Anything Look Sexy">
-    </div>
-    <div class="course-info">
-        <h3>Make Anything Look Sexy <span class="premium-badge">PREMIUM</span></h3>
-        <p>Make anything look amazing, as the name suggests.</p>
-        <div class="course-meta">
-            <span class="course-duration">6:57</span>
-            <button class="btn start-btn" data-link="https://www.youtube.com/watch?v=dD_lJdm6z0I&list=PLysQ4oSY7601DbwXD6eB48jvjFOt7bQiA&index=6">Start</button>
-        </div>
-    </div>
-</div>
+            <!-- Make Anything Look Sexy -->
+            <div class="course-item premium-course">
+                <div class="course-content">
+                    <div class="course-thumbnail">
+                        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/44811a01-8937-4bf2-853c-c4c9d041629c/thumbnail" alt="Make Anything Look Sexy">
+                    </div>
+                    <div class="course-info">
+                        <h3>Make Anything Look Sexy <span class="premium-badge">PREMIUM</span></h3>
+                        <p>Make anything look amazing, as the name suggests.</p>
+                        <div class="course-meta">
+                            <span class="course-duration">6:57</span>
+                            <button class="btn start-btn" onclick="checkPremiumAccess('sexy-video')">Start</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-wrapper" id="sexy-video">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dD_lJdm6z0I?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
 
-<!-- Expressions -->
-<div class="course-item premium-course">
-    <div class="course-thumbnail">
-        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/99b52f8e-e9dd-406f-9d21-feed86a1ac54/thumbnail" alt="Expressions">
-    </div>
-    <div class="course-info">
-        <h3>Expressions <span class="premium-badge">PREMIUM</span></h3>
-        <p>Use After Effects expressions to enhance visuals.</p>
-        <div class="course-meta">
-            <span class="course-duration">12:35</span>
-            <button class="btn start-btn" data-link="https://www.youtube.com/watch?v=NRMcILRz-UI&list=PLysQ4oSY7601DbwXD6eB48jvjFOt7bQiA&index=7">Start</button>
-        </div>
-    </div>
-</div>
+            <!-- Expressions -->
+            <div class="course-item premium-course">
+                <div class="course-content">
+                    <div class="course-thumbnail">
+                        <img src="https://video.squarespace-cdn.com/content/v1/66e0837e511ac65faae72b65/99b52f8e-e9dd-406f-9d21-feed86a1ac54/thumbnail" alt="Expressions">
+                    </div>
+                    <div class="course-info">
+                        <h3>Expressions <span class="premium-badge">PREMIUM</span></h3>
+                        <p>Use After Effects expressions to enhance visuals.</p>
+                        <div class="course-meta">
+                            <span class="course-duration">12:35</span>
+                            <button class="btn start-btn" onclick="checkPremiumAccess('expressions-video')">Start</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-wrapper" id="expressions-video">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/NRMcILRz-UI?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -761,6 +865,7 @@
         // Global variables
         let currentUser = null;
         let accounts = {};
+        let activeVideo = null;
         
         // DOM Elements
         const authContainer = document.getElementById('auth-container');
@@ -799,6 +904,40 @@
                 notification.style.animation = 'slideIn 0.5s reverse forwards';
                 setTimeout(() => notification.remove(), 500);
             }, 5000);
+        }
+        
+        // Toggle video visibility
+        function toggleVideo(videoId) {
+            const videoWrapper = document.getElementById(videoId);
+            
+            // If there's an active video and it's not the one we're toggling, hide it
+            if (activeVideo && activeVideo !== videoWrapper) {
+                activeVideo.classList.remove('active');
+            }
+            
+            // Toggle the current video
+            videoWrapper.classList.toggle('active');
+            activeVideo = videoWrapper.classList.contains('active') ? videoWrapper : null;
+            
+            // Scroll to the video if opening
+            if (videoWrapper.classList.contains('active')) {
+                videoWrapper.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+        
+        // Check premium access for videos
+        function checkPremiumAccess(videoId) {
+            if (!currentUser) {
+                openAuthModal();
+                showNotification('Please login to access premium content', true);
+                return;
+            }
+            
+            if (currentUser.purchasedCourses && currentUser.purchasedCourses.includes('full_course')) {
+                toggleVideo(videoId);
+            } else {
+                showNotification('Please purchase the course to access premium content', true);
+            }
         }
         
         // Initialize the app
@@ -862,26 +1001,6 @@
             
             // Payment button
             paymentButton.addEventListener('click', handlePayment);
-        }
-        
-        function handleStartClick(button, isFree) {
-            if (isFree) {
-                showNotification('Enjoy this free lesson!');
-                // Here you would normally open the content
-            } else {
-                if (!currentUser) {
-                    openAuthModal();
-                    showNotification('Please login to access premium content', true);
-                    return;
-                }
-                
-                if (currentUser.purchasedCourses && currentUser.purchasedCourses.includes('full_course')) {
-                    showNotification('Loading premium content...');
-                    // Here you would normally open the premium content
-                } else {
-                    showNotification('Please purchase the course to access premium content', true);
-                }
-            }
         }
         
         function openAuthModal() {
@@ -1053,42 +1172,26 @@
             }
         }
         
-        function handleStartButtonClick() {
-            if (!currentUser) {
-                openAuthModal();
-                return;
-            }
+        function unlockAllVideos() {
+            // Update all premium course buttons
+            document.querySelectorAll('.premium-course .start-btn').forEach(btn => {
+                btn.textContent = 'Watch Now';
+                btn.onclick = function() {
+                    const videoId = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+                    toggleVideo(videoId);
+                };
+            });
             
-            if (currentUser.purchasedCourses && currentUser.purchasedCourses.includes('full_course')) {
-                // User has access, play the video
-                const courseTitle = this.closest('.course-item').querySelector('h3').textContent;
-                alert(`Now playing: ${courseTitle}`);
-            } else {
-                alert('Please unlock premium content to access this video');
-            }
+            // Update payment button to show purchased
+            paymentButton.textContent = 'Access Granted ✓';
+            paymentButton.style.backgroundColor = '#00ff00';
+            paymentButton.style.color = '#000';
+            paymentButton.style.cursor = 'default';
+            paymentButton.onclick = null;
+            
+            showNotification('Premium content unlocked!');
         }
         
-function unlockAllVideos() {
-    // Only target premium course buttons
-    document.querySelectorAll('.premium-course .start-btn').forEach(btn => {
-        const videoLink = btn.getAttribute('data-link');
-        if (videoLink) {
-            btn.textContent = 'Watch Now';
-            btn.onclick = function() {
-                window.open(videoLink, '_blank');
-            };
-        }
-    });
-    
-    // Update payment button to show purchased
-    paymentButton.textContent = 'Access Granted ✓';
-    paymentButton.style.backgroundColor = '#00ff00';
-    paymentButton.style.color = '#000';
-    paymentButton.style.cursor = 'default';
-    paymentButton.onclick = null;
-    
-    showNotification('Premium content unlocked!');
-}        
         async function handlePayment() {
             if (!currentUser) {
                 openAuthModal();
